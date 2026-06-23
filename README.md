@@ -29,6 +29,49 @@ independentes e auto-suficientes — escolha o que se aplica a você:
 
 Em ambos, a aplicação fica disponível em http://localhost:8000.
 
+## Estrutura da tabela e dados de exemplo
+
+> O enunciado do desafio pediu **explicitamente** a estrutura da tabela e um
+> `INSERT` de dados de exemplo neste README. Em uso normal, o banco é populado
+> pelo seeder (`php artisan migrate --seed`, que gera dados para todo o mês de
+> janeiro/2026); os `INSERT`s abaixo são um recorte equivalente, apenas para
+> simular o banco manualmente.
+
+Estrutura da tabela `productions`:
+
+```sql
+CREATE TABLE `productions` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `line` enum('Geladeira','Máquina de Lavar','TV','Ar-Condicionado') NOT NULL,
+  `production_date` date NOT NULL,
+  `produced` int unsigned NOT NULL,
+  `defects` int unsigned NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `productions_production_date_line_index` (`production_date`, `line`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+```
+
+Dados de exemplo (três dias por linha, com volumes e taxas de defeito
+próximos aos do seeder):
+
+```sql
+INSERT INTO `productions` (`line`, `production_date`, `produced`, `defects`) VALUES
+('Geladeira',        '2026-01-02', 120, 4),
+('Geladeira',        '2026-01-03', 135, 5),
+('Geladeira',        '2026-01-04',  98, 3),
+('Máquina de Lavar', '2026-01-02', 110, 6),
+('Máquina de Lavar', '2026-01-03',  95, 4),
+('Máquina de Lavar', '2026-01-04', 125, 8),
+('TV',               '2026-01-02', 180, 14),
+('TV',               '2026-01-03', 160, 12),
+('TV',               '2026-01-04', 195, 18),
+('Ar-Condicionado',  '2026-01-02',  85, 8),
+('Ar-Condicionado',  '2026-01-03', 100, 10),
+('Ar-Condicionado',  '2026-01-04',  72, 7);
+```
+
 ## Decisões de arquitetura
 
 - **Thin Controller / Heavy Service:** toda a lógica de agregação, filtro e
