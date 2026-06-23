@@ -29,6 +29,7 @@ class ProductionDashboardController extends Controller
             'lines' => Production::LINES,
             'selectedLine' => $line,
             'summary' => $this->dashboard->summaryByLine($line),
+            'totals' => $this->dashboard->totals($line),
         ]);
     }
 }
