@@ -7,6 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 class Production extends Model
 {
     /**
+     * Linhas de produto da Planta A. Espelha o ENUM da coluna `line` e serve
+     * como fonte unica de verdade para validacao de filtro e montagem do
+     * seletor na view.
+     */
+    public const LINES = ['Geladeira', 'Máquina de Lavar', 'TV', 'Ar-Condicionado'];
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
