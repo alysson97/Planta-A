@@ -1,4 +1,4 @@
-# Esse projeto foi feito com o auxílio de Docker para rodar a versão 7 do Laravel, então existe os arquivos de Docker e um .env.docker dentro de src exclusivos para rodar com Docker.
+# Esse projeto foi feito com o auxílio de Docker para rodar a versão 7 do Laravel, então existe os arquivos de Docker .env.docker e um .env.example dentro de src exclusivos para rodar com Docker.
 
 # Abaixo está o README do projeto gerado com IA e editado por mim:
 
@@ -21,18 +21,13 @@ filtrar por uma específica.
 
 ## Como rodar
 
-Todos os comandos rodam **dentro do container** `app`:
+O passo a passo completo está em **[SETUP.md](SETUP.md)**, com dois caminhos
+independentes e auto-suficientes — escolha o que se aplica a você:
 
-```bash
-docker compose up -d
-docker compose exec app php artisan migrate --seed
-```
+- **Docker** (recomendado) — não exige PHP nem MySQL instalados na máquina.
+- **Local (nativo)** — para quem já tem PHP 7.4 e MySQL 8.
 
-A aplicação fica disponível em http://localhost:8000.
-
-> Os arquivos de Docker e o `.env.docker` (em `src/`) são exclusivos para a
-> execução via Docker. `DB_HOST` aponta para `db` (nome do serviço), não para
-> `127.0.0.1`.
+Em ambos, a aplicação fica disponível em http://localhost:8000.
 
 ## Decisões de arquitetura
 
